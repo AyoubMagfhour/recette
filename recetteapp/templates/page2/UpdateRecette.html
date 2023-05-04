@@ -1,0 +1,108 @@
+{% extends './base.html' %}
+{% block title %}Recette Update Form{% endblock %}
+{% block content %}
+{% load static %}
+  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+    <div class="container-fluid py-1 px-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+          <li class="breadcrumb-item text-sm text-white active" aria-current="page">Recette</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0">Ajouter une recette</h6>
+      </nav>
+        <ul class="navbar-nav  justify-content-end">
+          <li class="nav-item d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                {% if user.is_authenticated %}
+                <span class="d-sm-inline d-none">{{user.username}}</span>
+                {% endif %}
+              </a>
+            </li>
+            <li class="nav-item px-3 d-flex align-items-center">
+              <a href="{% url 'logout' %}" class="nav-link text-white font-weight-bold px-0">
+                <i class="fa fa-sign-out me-sm-1"></i>
+              </a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="main-content position-relative max-height-vh-100 h-100">
+   
+  
+    <div class="container-fluid py-4"  >
+      <div class="row" style="justify-content: center;">
+        <div class="col-md-8" >
+          <form method="POST" action="{% url 'update_recette' pk=recette.pk %}" enctype="multipart/form-data" >
+            {% csrf_token %}
+          <div class="card" >
+            <div class="card-header pb-0">
+              <div class="d-flex align-items-center">
+                <p class="mb-0">Ajouter une recette</p>
+                <div class="ms-auto">
+                <button class="btn bg-gradient-warning btn-sm">Ajouter</button>
+                <a href="/recette" class="btn bg-gradient-danger btn-sm ">Cancel</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <p class="text-uppercase text-sm">Information recette</p>
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">Nom du plat</label>
+                    <input class="form-control" type="text" value="{{ recette.nom_recette }}" name="title">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="example-text-input" class="form-control-label">Catégorie</label>
+                    <select class="form-select my-3" name="categorie" aria-label="Default select example">
+                      <option value="1" {% if recette.categorie == 1 %} selected {% endif %}>Entrées</option>
+                      <option value="2" {% if recette.categorie == 2 %} selected {% endif %}>Plats</option>
+                      <option value="3" {% if recette.categorie == 3 %} selected {% endif %}>Déssert</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <hr class="horizontal dark">
+              <p class="text-uppercase text-sm">Préparation</p>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea12" class="form-label">Ingrediant :</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea12" name="ingredient"  rows="3">
+                              {{ recette.ingredients }}
+                            </textarea>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea12" class="form-label">Description</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea12" name="description"  rows="3">
+                              {{ recette.discription }}
+                            </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+    
+            
+            </div>
+          </div>
+        </div>
+      </div>
+{%endblock%}

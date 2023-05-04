@@ -1,0 +1,83 @@
+{% extends './base.html' %}
+{% block title %}Historique{% endblock %}
+{% block Historique %}active{% endblock %}
+{% block content %}
+{% load static %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Historique</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">Historique</h6>
+        </nav>
+       
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                {% if user.is_authenticated %}
+                <span class="d-sm-inline d-none">{{user.username}}</span>
+                {% endif %}
+              </a>
+            </li>
+            <li class="nav-item px-3 d-flex align-items-center">
+              <a href="{% url 'logout' %}" class="nav-link text-white font-weight-bold px-0">
+                <i class="fa fa-sign-out me-sm-1"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-xl-6 mb-xl-0 mb-4">
+              <div class="card bg-transparent shadow-xl">
+              
+              </div>
+            </div>
+           
+            
+          </div>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-7 mt-4 " style="width: 100%">
+          <div class="card" >
+            <div class="card-header pb-0 px-3">
+              <h6 class="mb-0">Information d'historique</h6>
+            </div>
+            <div class="card-body pt-4 p-3">
+              <ul class="list-group">
+                {% for comment in comments %}
+                <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-3 text-sm">{{ comment.user.first_name }} {{ comment.user.last_name }}</h6>
+                    <span class="mb-2 text-xs">Nom utilisateur: <span class="text-dark font-weight-bold ms-sm-2">{{ comment.user.username }}</span></span>
+                    <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">{{ comment.user.email }}</span></span>
+                    <span class="mb-2 text-xs">Nom Du Recette: <span class="text-dark ms-sm-2 font-weight-bold">{{ comment.recette.nom_recette }}</span></span>
+                    <span class="mb-2 text-xs">Commentaire: <span class="text-dark ms-sm-2 font-weight-bold">{{ comment.message }}</span></span>
+                    <span class="mb-2 text-xs">Date: <span class="text-dark ms-sm-2 font-weight-bold">{{ comment.date_sent }}</span></span>
+                    <span class="mb-2 text-xs">Rate: <span class="text-dark ms-sm-2 font-weight-bold">{% if comment.rating > 0 %} {{ comment.rating }} Stars {% else %} Skiped rate{% endif %}</span></span>
+                  </div>
+                  <div class="ms-auto text-end">
+                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{% url 'delete_comment' comment.pk %}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                  </div>
+                </li>
+                {%endfor%}
+              </ul>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+{%endblock%}

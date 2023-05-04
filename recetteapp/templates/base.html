@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/apple-icon.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'img/pizza.png' %}">
+      <title>{% block title %}Page Admin{% endblock %}</title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{% static 'css/soft-ui-dashboard.css' %}" rel="stylesheet" />
+</head>
+<body>
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" href="#" target="_blank">
+        <img src="{% static 'img/pizza.png' %}" class="navbar-brand-img h-100" alt="logo">
+        <span class="ms-1 font-weight-bold">Administrateur</span>
+      </a>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="navbar-nav  w-auto " id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link  {% block Dashboard %}{% endblock %}" href="/dashboard">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
+                <title>home 3</title>
+                <g fill="#212121" class="nc-icon-wrapper">
+                  <path d="M16,5.842l-12,9.6V30a1,1,0,0,0,1,1h8V24.5a.5.5,0,0,1,.5-.5h5a.5.5,0,0,1,.5.5V31h8a1,1,0,0,0,1-1V15.442ZM18.5,20h-5a.5.5,0,0,1-.5-.5v-4a.5.5,0,0,1,.5-.5h5a.5.5,0,0,1,.5.5v4A.5.5,0,0,1,18.5,20Z" fill="#212121"></path>
+                  <path data-color="color-2" d="M31.624,13.219l-15-12a1,1,0,0,0-1.249,0L8,7.119V4.5A.5.5,0,0,0,7.5,4h-2a.5.5,0,0,0-.5.5V9.519l-4.625,3.7a1,1,0,0,0,1.249,1.562L16,3.28l14.375,11.5a1,1,0,1,0,1.25-1.561Z"></path>
+                </g>
+              </svg>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link  {% block Recette %}{% endblock %}" href="/recette">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
+                <title>news</title>
+                <g fill="#212121" class="nc-icon-wrapper">
+                <path class="colot-background" d="M30,1H7A1,1,0,0,0,6,2V27.019A1.961,1.961,0,0,1,4.059,29H3.91A1.945,1.945,0,0,1,2,27.021V19H4V17H1a1,1,0,0,0-1,1v8.981A3.947,3.947,0,0,0,3.874,31H27.057A3.946,3.946,0,0,0,31,27.123V2A1,1,0,0,0,30,1ZM25.5,25h-14a.5.5,0,0,1-.5-.5v-1a.5.5,0,0,1,.5-.5h14a.5.5,0,0,1,.5.5v1A.5.5,0,0,1,25.5,25Zm0-6h-14a.5.5,0,0,1-.5-.5v-1a.5.5,0,0,1,.5-.5h14a.5.5,0,0,1,.5.5v1A.5.5,0,0,1,25.5,19Zm0-6h-14a.5.5,0,0,1-.5-.5v-6a.5.5,0,0,1,.5-.5h14a.5.5,0,0,1,.5.5v6A.5.5,0,0,1,25.5,13Z" fill="#212121"></path>
+              </g>
+            </svg>
+
+
+            </div>
+            <span class="nav-link-text ms-1">Recette</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  {% block Visiteur %}{% endblock %}" href="/visiteur">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>customer-support</title>
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g transform="translate(1716.000000, 291.000000)">
+                      <g transform="translate(1.000000, 0.000000)">
+                        <path class="color-background opacity-6" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
+                        <path class="color-background" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
+                        <path class="color-background" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="nav-link-text ms-1">Visiteur</span>
+          </a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link  {% block Historique %}{% endblock %}" href="/historique">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>office</title>
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g transform="translate(1716.000000, 291.000000)">
+                      <g id="office" transform="translate(153.000000, 2.000000)">
+                        <path class="color-background opacity-6" d="M12.25,17.5 L8.75,17.5 L8.75,1.75 C8.75,0.78225 9.53225,0 10.5,0 L31.5,0 C32.46775,0 33.25,0.78225 33.25,1.75 L33.25,12.25 L29.75,12.25 L29.75,3.5 L12.25,3.5 L12.25,17.5 Z"></path>
+                        <path class="color-background" d="M40.25,14 L24.5,14 C23.53225,14 22.75,14.78225 22.75,15.75 L22.75,38.5 L19.25,38.5 L19.25,22.75 C19.25,21.78225 18.46775,21 17.5,21 L1.75,21 C0.78225,21 0,21.78225 0,22.75 L0,40.25 C0,41.21775 0.78225,42 1.75,42 L40.25,42 C41.21775,42 42,41.21775 42,40.25 L42,15.75 C42,14.78225 41.21775,14 40.25,14 Z M12.25,36.75 L7,36.75 L7,33.25 L12.25,33.25 L12.25,36.75 Z M12.25,29.75 L7,29.75 L7,26.25 L12.25,26.25 L12.25,29.75 Z M35,36.75 L29.75,36.75 L29.75,33.25 L35,33.25 L35,36.75 Z M35,29.75 L29.75,29.75 L29.75,26.25 L35,26.25 L35,29.75 Z M35,22.75 L29.75,22.75 L29.75,19.25 L35,19.25 L35,22.75 Z"></path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="nav-link-text ms-1">Historique</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+  {% block content %}
+
+  {% endblock %}
+</body>
+</html>

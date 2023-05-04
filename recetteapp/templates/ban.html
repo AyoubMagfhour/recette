@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ {% if user.is_authenticated %}
+                <span class="d-sm-inline d-none">{{user.username}}</span>
+                {% endif %}
+ <a href="{% url 'logout' %}" class="nav-link text-body p-0">
+                logout
+              </a>
+<h1>rak Tbaniti asat</h1>
+</body>
+</html>
