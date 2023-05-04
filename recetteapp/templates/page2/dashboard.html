@@ -152,7 +152,7 @@
             </div>
             {% if highest_rated_recette %}
             <div class="my-3 mx-2">
-            <img src="{{ highest_rated_recette.image }}" width="90%"  alt="img-blur-shadow" class="img-fluid shadow border-radius-xl mx-2">
+            <img src="{% if highest_rated_recette.image == '' %}{{highest_rated_recette.image_manual}}{%else%}{{ highest_rated_recette.image }}{%endif%}" width="90%"  alt="img-blur-shadow" class="img-fluid shadow border-radius-xl mx-2">
             <div class="card-body px-1 pb-0 mx-2">
               <p class="text-gradient text-dark mb-2 text-sm">{{ highest_rated_recette.categorie }}</p>
               <a href="javascript:;">

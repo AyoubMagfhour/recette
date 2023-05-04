@@ -23,7 +23,9 @@
         <ul class="uk-navbar-nav uk-visible@m uk-margin-large-left">
           <li ><a href="/index">Home</a></li>
           <li class="uk-active"><a href="/search">Search</a></li>
-          <li><a href="/favorite">Mes Favotites</a></li>
+          {% if user.is_authenticated %}
+          <li ><a href="/favorite">Mes Favorites</a></li>
+          {%endif%}
           <li ><a href="/contact">Share Your Recipe</a></li>
         </ul>
       </div>
@@ -46,10 +48,18 @@
   <div class="uk-container">
     <div data-uk-grid>
       <div class="uk-width-1-2@m">
-        <form method="GET" class="uk-search uk-search-default uk-width-1-1">
-              <span data-uk-search-icon></span>
-              <input class="uk-search-input uk-text-small uk-border-rounded uk-form-large" type="search" name="search" placeholder="Search for recipes...">
-              <button data-uk-search-icon class=""></button>
+        <form method="GET" class="uk-search uk-search-default uk-width-1-1" id="recipe-search-form">
+
+          <input class="uk-search-input uk-text-small uk-border-rounded uk-form-large" type="search" name="search" placeholder="Search for recipes...">
+
+          <div class="uk-margin-top">
+        <select class="uk-select uk-width-1-1 uk-border-rounded uk-text-small" name="category">
+            <option value="">All categories</option>
+            <option value="Entrées">Entrées</option>
+            <option value="Plats">Plats</option>
+            <option value="Deserts">Deserts</option>
+        </select>
+    </div>
             </form>
       </div>
 
@@ -167,6 +177,17 @@
   </div>
 </div>
 
+
+<script>
+    const form = document.getElementById('recipe-search-form');
+    const searchInput = form.querySelector('input[name="search"]');
+    const categoryInput = form.querySelector('select[name="category"]');
+    [searchInput, categoryInput].forEach(input => {
+        input.addEventListener('change', () => {
+            form.submit();
+        });
+    });
+</script>
 </body>
 
 </html>

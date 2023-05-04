@@ -18,20 +18,24 @@
   <div class="uk-container">
     <div class="uk-position-z-index" data-uk-navbar>
       <div class="uk-navbar-left">
-        <a class="uk-navbar-item uk-logo" href="index.html">Chef Ameksa</a>
+        <a class="uk-navbar-item uk-logo" href="index.html">Chef Delice</a>
         <ul class="uk-navbar-nav uk-visible@m uk-margin-large-left">
           <li class="uk-active"><a href="index.html">Home</a></li>
           <li ><a href="/search">Search</a></li>
+          {% if user.is_authenticated %}
           <li ><a href="/favorite">Mes Favorites</a></li>
+          {%endif%}
           <li ><a href="/contact">Share Your Recipe</a></li>
         </ul>
       </div>
       <div class="uk-navbar-right">
           {% if user.is_authenticated %}
-        <div><a class="uk-button uk-button-primary" href="/logout">Logout</a></div>
+                <div><a class="uk-button uk-button-primary" href="#"><span uk-icon="user" ></span>{{ user.username }}</a></div>
+        <div><a class="uk-button uk-button-primary" href="/logout"><span uk-icon="sign-out" ></span>Logout</a></div>
+
         {%else%}
         <div class="uk-navbar-item">
-          <div><a class="uk-button uk-button-primary" href="/login">Login</a></div>
+          <div><a class="uk-button uk-button-primary" href="/login"><span uk-icon="sign-in"></span>Login</a></div>
         </div>
           {%endif%}
         <a class="uk-navbar-toggle uk-hidden@m" href="#offcanvas" data-uk-toggle><span

@@ -33,19 +33,28 @@ def index(request):
 def recipe(request):
     return render(request, 'visiteur/recipe.html')
 
+
 def search(request):
     queryset = Recette.objects.all()
     search_query = request.GET.get('search')
+    category = request.GET.get('category')
+
     if search_query:
         queryset = queryset.filter(nom_recette__icontains=search_query)
+
+    if category:
+        queryset = queryset.filter(categorie__iexact=category)
+
     paginator = Paginator(queryset, 16)
     page = request.GET.get('page', 1)
+
     try:
         recette = paginator.page(page)
     except PageNotAnInteger:
         recette = paginator.page(1)
     except EmptyPage:
         recette = paginator.page(paginator.num_pages)
+
     if request.method == 'POST':
         if request.user.is_authenticated:
             recette_id = request.POST.get('recette_id')
@@ -55,6 +64,7 @@ def search(request):
             return redirect('search')
         else:
             return redirect('login')
+
     users = [recette.id_user for recette in recette]
     return render(request, 'visiteur/search.html', {'recettes': recette, 'users': users})
 
@@ -293,7 +303,7 @@ def login_view(request):
                 # Redirect to the home page
                 return redirect('listrecette')
             elif user.groups.filter(name='ban').exists():
-                return redirect('ban')
+                return redirect('login')
             else:
                 # Redirect to the dashboard
                 return redirect('dashboard')
@@ -356,7 +366,7 @@ def allrecettevisiteur(request):
 
 
 
-@login_required(login_url='/login')
+
 def recipe_detail(request, pk):
     recette = get_object_or_404(Recette, pk=pk)
     ingredients = recette.ingredients.split('\n') if recette.ingredients else []
@@ -400,7 +410,7 @@ def favorite_recettes(request):
     return render(request, 'visiteur/Favorite.html', {'favorite_recettes': favorite_recettes, 'users': users})
 
 
-
+@login_required(login_url='/login')
 def add_recetteclient(request):
     categorie_map = {
         '1': 'Entrées',
