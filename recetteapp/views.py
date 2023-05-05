@@ -106,15 +106,6 @@ def dashboard(request):
     return render(request, 'page2/dashboard.html', context)
 
 @login_required(login_url='/login')
-def recette(request):
-    return render(request, 'page/recette.html')
-
-@login_required(login_url='/login')
-@user_passes_test(lambda u: u.is_superuser)
-def form(request):
-    return render(request, 'page/form3.html')
-
-@login_required(login_url='/login')
 @user_passes_test(lambda u: u.is_superuser)
 def historique(request):
     comments = Comment.objects.all()
@@ -122,14 +113,8 @@ def historique(request):
 
 @login_required(login_url='/login')
 @user_passes_test(lambda u: u.is_superuser)
-def visiteur(request):
-    return render(request, 'page/visiteur.html')
-
-@login_required(login_url='/login')
-@user_passes_test(lambda u: u.is_superuser)
 def suggesion(request):
     return render(request, 'page/page2.html')
-
 
 @login_required(login_url='/login')
 @user_passes_test(lambda u: u.is_superuser)
@@ -158,7 +143,6 @@ def scrape_view(request):
         url = request.POST.get('url')
         response = requests.get(url)
         soup = BeautifulSoup(response.content, 'html.parser')
-        # Get the whole HTML content of the page
         div_element = soup.find('h1', {'class': 'app_recipe_title_page'})
         dsc = soup.find('ol')
         img_url = soup.find('img', {'class': 'bu_cuisine_img_noborder photo'})['src']
@@ -195,24 +179,19 @@ def add_recette(request):
         ingredients = request.POST.get('ingredient')
         description = request.POST.get('description')
         image_manual = request.FILES['image_manual']
-        id_user = request.user  # assuming you are using Django's built-in user authentication
+        id_user = request.user
 
         if image_manual :
-            # Read the content of the uploaded image file
             image_data = image_manual.read()
-
-            # Encode the image data as base64
             base64_data = base64.b64encode(image_data).decode('utf-8')
-
-            # Concatenate the base64 data with the appropriate data URL prefix
             data_url = f"data:image/{os.path.splitext(image_manual.name)[1][1:]};base64,{base64_data}"
             recette = Recette(nom_recette=nom_recette, categorie=categorie, ingredients=ingredients,
                               discription=description, image_manual=data_url, id_user=id_user)
             recette.save()
 
-        return redirect('/recette')  # replace with your own success URL
+        return redirect('/recette')
 
-    return render(request, '/affiche')  # replace with your own template name
+    return render(request, '/affiche')
 
 @login_required(login_url='/login')
 @user_passes_test(lambda u: u.is_superuser)
@@ -228,15 +207,15 @@ def add_recette2(request):
         ingredients = request.POST.get('ingredient')
         description = request.POST.get('description')
         image = request.POST.get('image')
-        id_user = request.user  # assuming you are using Django's built-in user authentication
+        id_user = request.user
 
         recette = Recette(nom_recette=nom_recette, categorie=categorie, ingredients=ingredients,
                               discription=description, image=image, id_user=id_user)
 
         recette.save()
 
-        return redirect('/recette')  # replace with your own success URL
-    return render(request, '/affiche')  # replace with your own template name
+        return redirect('/recette')
+    return render(request, '/affiche')
 
 def logout_view(request):
     logout(request)
@@ -245,7 +224,6 @@ def logout_view(request):
 
 def sign_up(request):
     if request.method == 'POST':
-        # Retrieve user data from the form
         last_name = request.POST['last_name']
         first_name = request.POST['first_name']
         username = request.POST['username']
@@ -253,23 +231,17 @@ def sign_up(request):
         password1 = request.POST['password1']
         password2 = request.POST['password2']
 
-        # Validate user data
         if password1 != password2:
-            # Passwords don't match
             return render(request, 'registration/sign-up.html', {'error': 'Passwords do not match'})
         if User.objects.filter(username=username).exists():
-            # Username already exists
             return render(request, 'registration/sign-up.html', {'error': 'Username already exists'})
 
-        # Create the new user
         user = User.objects.create_user(username=username, email=email, password=password1, first_name=first_name,
                                         last_name=last_name)
 
-        # Add the user to the "visitor group"
         visitor_group = Group.objects.get(name='visiteur')
         visitor_group.user_set.add(user)
 
-        # Log the user in and redirect to the home page
         user = authenticate(username=username, password=password1)
         login(request, user)
         return redirect('login')
@@ -287,32 +259,26 @@ def all_recette(request):
 def delete_recette(request, pk):
     recette = get_object_or_404(Recette, pk=pk)
     recette.delete()
-    return redirect('/recette')  # replace with your own success URL
+    return redirect('/recette')
 
 
 def login_view(request):
     if request.method == 'POST':
-        # Perform authentication
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # Check if user is in the "visiteur" group
             if user.groups.filter(name='visiteur').exists():
-                # Redirect to the home page
                 return redirect('listrecette')
             elif user.groups.filter(name='ban').exists():
                 return redirect('login')
             else:
-                # Redirect to the dashboard
                 return redirect('dashboard')
         else:
-            # Authentication failed
             error_message = "Invalid username or password."
             return render(request, 'registration/sign-in.html', {'error_message': error_message})
     else:
-        # Show the login form
         return render(request, 'registration/sign-in.html')
 
 
@@ -423,24 +389,19 @@ def add_recetteclient(request):
         ingredients = request.POST.get('ingredient')
         description = request.POST.get('description')
         image_manual = request.FILES['image_manual']
-        id_user = request.user  # assuming you are using Django's built-in user authentication
+        id_user = request.user
 
         if image_manual :
-            # Read the content of the uploaded image file
             image_data = image_manual.read()
-
-            # Encode the image data as base64
             base64_data = base64.b64encode(image_data).decode('utf-8')
-
-            # Concatenate the base64 data with the appropriate data URL prefix
             data_url = f"data:image/{os.path.splitext(image_manual.name)[1][1:]};base64,{base64_data}"
             recette = Recette(nom_recette=nom_recette, categorie=categorie, ingredients=ingredients,
                               discription=description, image_manual=data_url, id_user=id_user)
             recette.save()
 
-        return redirect('/index')  # replace with your own success URL
+        return redirect('/index')
 
-    return render(request, '/contact')  # replace with your own template name
+    return render(request, '/contact')
 
 
 
@@ -480,13 +441,10 @@ def update_recette(request, pk):
     }
     recette = Recette.objects.get(pk=pk)
     if request.method == 'POST':
-        # Extract data from the form fields
         recette.nom_recette = request.POST.get('title')
         recette.categorie = categorie_map.get(request.POST.get('categorie'))
         recette.ingredients = request.POST.get('ingredient')
         recette.discription = request.POST.get('description')
-
-        # Save the updated Recette object
         recette.save()
 
         return redirect('/recette')
