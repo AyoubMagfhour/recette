@@ -1,7 +1,7 @@
 # recette
 <h2>Note :</h2>
 <ul>
-  <li>Avant l'execution du projet il fait creer un super utilisateur avec la commande "python manage.py createsuperuser"</li>
+  <li>Avant l'execution du projet il faut creer un super utilisateur avec la commande "python manage.py createsuperuser"</li>
   <li>Executer est accédé a "/admin"</li>
   <li>Apres créer 2 groupe Ban est visiteur </li>
   <li>connecter a votre compte est créér 2 group 'Ban' Est 'visiteur'</li>
