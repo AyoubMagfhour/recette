@@ -12,6 +12,7 @@
     <li>can view favorite recette</li>
     <li>can add recette</li>
     <li>can view recette</li>
+    <li>can view comment</li>
    </ul>
 </ul>
 
