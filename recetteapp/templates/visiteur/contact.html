@@ -30,7 +30,8 @@
       </div>
       <div class="uk-navbar-right">
           {% if user.is_authenticated %}
-        <div><a class="uk-button uk-button-primary" href="/logout">Logout</a></div>
+          <div><a class="uk-button uk-button-primary" href="#"><span uk-icon="user" ></span>{{ user.username }}</a></div>
+        <div><a class="uk-button uk-button-primary" href="/logout"><span uk-icon="sign-out" ></span>Logout</a></div>
         {%else%}
         <div class="uk-navbar-item">
           <div><a class="uk-button uk-button-primary" href="/login">Login</a></div>

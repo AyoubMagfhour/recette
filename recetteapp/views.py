@@ -374,7 +374,7 @@ def recipe_detail(request, pk):
     comments = recette.comment_set.all()
     recettes = Recette.objects.order_by('?')[:8]
     random.shuffle(list(recettes))
-    context = {'recette': recette, 'pk': pk, 'comments': comments, 'ingredients': ingredients, 'descriptions': descriptions, 'user': recette.id_user, 'recettes': recettes}
+    context = {'recette': recette, 'pk': pk, 'comments': comments, 'ingredients': ingredients, 'descriptions': descriptions, 'users': recette.id_user, 'recettes': recettes}
     return render(request, 'visiteur/recipe.html', context)
 
 @login_required(login_url='/login')

@@ -65,7 +65,8 @@
       </div>
       <div class="uk-navbar-right">
           {% if user.is_authenticated %}
-        <div><a class="uk-button uk-button-primary" href="/logout">Logout</a></div>
+        <div><a class="uk-button uk-button-primary" href="#"><span uk-icon="user" ></span>{{ user.username }}</a></div>
+        <div><a class="uk-button uk-button-primary" href="/logout"><span uk-icon="sign-out" ></span>Logout</a></div>
         {%else%}
         <div class="uk-navbar-item">
           <div><a class="uk-button uk-button-primary" href="/login">Login</a></div>
@@ -92,7 +93,7 @@
         <hr>
         <div data-uk-grid>
           <div class="uk-width-auto@s uk-text-small">
-            <p class="uk-margin-small-top uk-margin-remove-bottom">Created by <a href="#" style="color : orange; text-decoration : none;">{{ user.username }}</a></p>
+            <p class="uk-margin-small-top uk-margin-remove-bottom">Created by <a href="#" style="color : orange; text-decoration : none;">{{ users.username }}</a></p>
             <span class="uk-text-muted">21 recipes</span>
           </div>
 
@@ -235,7 +236,7 @@
                 <span class="uk-rating-filled" data-uk-icon="icon: list; ratio: 0.7"></span>
                 <span class="uk-margin-xsmall-left">{{ recett.categorie }}</span>
               </div>
-              <div class="uk-width-expand uk-text-right">by {{ user.username }}</div>
+              <div class="uk-width-expand uk-text-right">by {{ recett.id_user.username }}</div>
             </div>
           </div>
           <a href="{% url 'recipe_detail' pk=recette.id_recette %}" class="uk-position-cover"></a>
