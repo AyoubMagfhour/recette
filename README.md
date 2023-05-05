@@ -1,11 +1,11 @@
 # recette
 <h2>Note :</h2>
 <ul>
-  <li>Avant l'execution du projet il faut creer un super utilisateur avec la commande "python manage.py createsuperuser"</li>
-  <li>Executer est accédé a "/admin"</li>
-  <li>Apres créer 2 groupe Ban est visiteur </li>
-  <li>connecter a votre compte est créér 2 group 'Ban' Est 'visiteur'</li>
-  <li>Visiteur contient les Permissions Suivant :</li>
+  <li>Avant l'execution du projet il faut créer un super utilisateur avec la commande "python manage.py createsuperuser"</li>
+  <li>Executer et accédé à "/admin"</li>
+  <li>Apres créer 2 groupes Ban et visiteur </li>
+  <li>connecter à votre compte est créér 2 groupes 'Ban' et 'visiteur'</li>
+  <li>Visiteur contient les Permissions Suivantes :</li>
   <ul>
     <li>can add comment</li>
     <li>can delete favorite recette</li>
@@ -16,7 +16,7 @@
 </ul>
 
 
-<h2>Les Fonction quand n'a utilisé dans ce projet :</h2>
+<h2>Les Fonctions qu'on a utilisé dans ce projet :</h2>
 
 <h4>Login_view :</h4>
 <p>Ce code gère l'authentification des utilisateurs sur le site web. Il vérifie si la méthode de
